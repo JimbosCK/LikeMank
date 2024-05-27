@@ -25,12 +25,14 @@
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/code/0000">Code</a>
+            <a class="nav-link" href="/generatecode">Code</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+  {{!-- Navigation links --}}
+
 
   {{!-- Body --}}
   <div class="container mt-4">
@@ -45,16 +47,20 @@
   </div>
 
   <div class="container mt-4">
-    <div class="qrcoderow" style="display: flex; justify-content: space-evenly">
-      <main>
-        <div id="qrcode"></div>
-      </main>
-
-      <div class="promocodecol" style="align-content: center;">
-        <p>Promotional Code: </p>
-        <p id="promocode" style="font-weight: bold;">{{promocode}}</p>
+    <div class="container mt-4">
+      <div class="card">
+        <div class="card-header"> </div>
+        <div class="card-body">
+          <form action="/promocode/generate" method="POST">
+            <div class="mb-3">
+              <label for="name-reg" class="form-label">Your Promotion Code:</label>
+              <input type="text" class="form-control" id="promotionalcode" name="promotionalcode" value="{{promocode}}"
+                disabled="true">
+            </div>
+            <button type="submit" class="btn btn-primary">Generate Promotional Code</button>
+          </form>
+        </div>
       </div>
-
     </div>
   </div>
 </body>
@@ -66,6 +72,7 @@
   var htmlbackError = backError.innerHTML
 
   if (htmlCode != undefined && htmlCode != "" && htmlbackError == "") {
+    codeLabel.innerHTML = "Promotional Code:";
     var qrcode = new QRCode("qrcode", htmlCode);
   }
 </script>
